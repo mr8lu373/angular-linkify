@@ -30,7 +30,12 @@ angular.module('linkify')
           _text = _text.replace(/(^|\s)*#([\u00C0-\u1FFF\w]+)/g, '$1<a href="https://twitter.com/search?q=%23$2" target="_blank">#$2</a>');
         }
 
-
+        // Facebook
+        if (type === 'facebook') {
+          _text = _text.replace(/(|\s)*@([\u00C0-\u1FFF\w]+)/g, '$1<a href="https://www.facebook.com//$2" target="_blank">@$2</a>');
+          _text = _text.replace(/(^|\s)*#([\u00C0-\u1FFF\w]+)/g, '$1<a href="https://www.facebook.com/hashtag/$2" target="_blank">#$2</a>');
+        }
+        
         // Github
         if (type === 'github') {
           _text = _text.replace(/(|\s)*@(\w+)/g, '$1<a href="https://github.com/$2" target="_blank">@$2</a>');
@@ -55,6 +60,7 @@ angular.module('linkify')
 
     return {
       twitter: _linkifyAsType('twitter'),
+      facebook: _linkifyAsType('facebook'),
       github: _linkifyAsType('github'),
       normal: _linkifyAsType()
     };
